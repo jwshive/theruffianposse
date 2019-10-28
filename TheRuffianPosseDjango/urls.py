@@ -22,4 +22,5 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', posse_views.home, name='home'),
+    path('news/<int:id>/', posse_views.read_news, name='read_news'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -35,3 +35,8 @@ def home(request):
     guild_raid_rankings = get_json_data(guild_raid_rankings)
 
     return render(request, 'front_page.html', {'warcraft_logs': warcraft_logs_json, 'guild_raid_rankings': guild_raid_rankings, 'guild_news': guild_news, 'helpful_links': helpful_links, 'addon_links': addon_links})
+
+
+def read_news(request, id):
+    news_post = GuildNews.objects.get(pk=id)
+    return render(request, 'read_news.html', {'news_post': news_post})
