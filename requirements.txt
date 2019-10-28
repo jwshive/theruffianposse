@@ -1,0 +1,4 @@
+django-heroku
+django
+gunicorn
+dj-database-url

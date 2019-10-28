@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %} <title>The Ruffian Posse</title> {% endblock %}
+{% block content %}
+{% load posse_filters %}
+
+<table border="2">
+    <tr>
+        <th colspan="3">Logs of the Last Month</th>
+    </tr>
+    <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <!---<th>Zone</th>--->
+        <th>Links</th>
+    </tr>
+    {% for item in warcraft_logs %}
+    <tr>
+        <td>{{ item.title }}</td>
+        <td>{{ item.start | ctime }}</td>
+        <!---<td>{{ item.zone | translate_zone_number }}--->
+        <td><a href="https://www.warcraftlogs.com/reports/{{ item.id }}" target="_blank"><img width="16" height="16" src="https://dmszsuqyoe6y6.cloudfront.net/img/warcraft/favicon.png"></a> <a href="https://www.wipefest.net/report/{{ item.id }}" target="_blank"><img src="https://www.wipefest.gg/favicon.ico"></a> <a href="https://www.wowanalyzer.com/report/{{ item.id }}" target="_blank"><img src="https://wowanalyzer.com/favicon.ico"></a></td>
+    </tr>
+    {% endfor %}
+</table>
+<hr>
+
+<table border="2">
+    {% for raid_name, raid_ranking_info in guild_raid_rankings.raid_rankings.items %}
+        <tr>
+            <th colspan="3">{{ raid_name|title|replace_dashes }}</th>
+            {% for difficulty, nested_value in raid_ranking_info.items %}
+                <td>{{ difficulty|title }}: {% if nested_value.realm == 0 %}No Kills{% else %}{{ nested_value.realm }}{% endif %}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+
+<hr>
+<h2>Guild News</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+    {% for news in guild_news %}
+      <div class="card-body">
+        <h1>{{ news.news_description }}</h1>
+        <p class=" text-muted">{{ news.added_by | title }} | {{ news.added_on }}</p>
+        <p class="card-text ">{{ news.news_body | safe | truncatewords:50 }}</p>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+<hr>
+<h2>Guild Links</h2>
+<table>
+    <tr>
+        <th>URL</th>
+    </tr>
+    {% for links in helpful_links %}
+    <tr>
+        <td><a href="{{ links.link_url }}" target="_blank">{{ links.link_name }}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<hr>
+<h2>Required Addons</h2>
+<table>
+    <tr>
+        <th>Addon Name</th>
+    </tr>
+    {% for link in addon_links %}
+    <tr>
+        <td><a href="{{ link.link_url }}" target="_blank">{{ link.addon_name }}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+    <hr>
+    <iframe src="https://discordapp.com/widget?id=295363255117938688&theme=dark&username=Kalinakov#7485" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+{% endblock %}
