@@ -46,7 +46,7 @@
         <table border="2">
             {% for raid_name, raid_ranking_info in guild_raid_rankings.raid_rankings.items %}
             <tr>
-                <th colspan="4">{{ raid_name|title|replace_dashes }}</th>
+                <th colspan="3">{{ raid_name|title|replace_dashes }}</th>
                 {% for difficulty, nested_value in raid_ranking_info.items %}
                     <td>{{ difficulty|title }}: {% if nested_value.realm == 0 %}No Kills{% else %}{{ nested_value.realm }}{% endif %}</td>
                 {% endfor %}
@@ -56,7 +56,7 @@
     <p></p>
         <table border="2">
             <tr>
-                <th colspan="3">Recent Raid Logs</th>
+                <th colspan="4">Recent Raid Logs</th>
             </tr>
             <tr>
                 <th>Title</th>
