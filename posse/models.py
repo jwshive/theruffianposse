@@ -58,3 +58,26 @@ class GuildAddonLinks(models.Model):
 
     def __str__(self):
         return self.addon_name
+
+
+APPLICANT_CHOICES = [
+    ('Pending', 'Pending'),
+    ('Approved', 'Approved'),
+    ('Denied', 'Denied'),
+]
+
+
+class GuildApplications(models.Model):
+    character_name = models.CharField(max_length=12)
+    character_realm = models.CharField(max_length=100)
+    character_class = models.CharField(max_length=20)
+    character_role = models.CharField(max_length=10)
+    character_level = models.IntegerField()
+    discord_username = models.CharField(max_length=100)
+    application_status = models.CharField(max_length=20, choices=APPLICANT_CHOICES, default=APPLICANT_CHOICES[0][0])
+
+    class Meta:
+        verbose_name_plural = 'Guild Applicants'
+
+    def __str__(self):
+        return '{} of {}'.format(self.character_name, self.character_realm)

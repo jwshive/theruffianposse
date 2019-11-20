@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 import datetime
 from time import mktime
 import urllib.request
 import json
-from .models import WarcraftLogsSettings, RaiderIOSettings, GuildNews, HelpfulGuildLinks, GuildAddonLinks
+from .models import WarcraftLogsSettings, RaiderIOSettings, GuildNews, HelpfulGuildLinks, GuildAddonLinks, GuildApplications
+from .forms import ApplicationForm
 
 
 def get_json_data(json_url):
@@ -40,3 +42,17 @@ def home(request):
 def read_news(request, id):
     news_post = GuildNews.objects.get(pk=id)
     return render(request, 'read_news.html', {'news_post': news_post})
+
+
+def apply_to_guild(request):
+
+    if request.method == 'POST':
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+            applicant = form.save(commit=False)
+            applicant.save()
+            return redirect('home')
+    else:
+        form = ApplicationForm()
+
+    return render(request, 'apply.html', {'form': form})

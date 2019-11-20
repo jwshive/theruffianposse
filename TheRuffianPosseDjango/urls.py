@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', posse_views.home, name='home'),
     path('news/<int:id>/', posse_views.read_news, name='read_news'),
+    path('apply', posse_views.apply_to_guild, name='apply_to_guild')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
