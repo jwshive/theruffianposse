@@ -61,14 +61,14 @@
             <tr>
                 <th>Title</th>
                 <th>Date</th>
-                <!---<th>Zone</th>--->
+                <th>Zone</th>
                 <th>Links</th>
             </tr>
             {% for item in warcraft_logs %}
                 <tr>
                     <td>{{ item.title }}</td>
                     <td>{{ item.start | ctime }}</td>
-                    <!---<td>{{ item.zone | translate_zone_number }}--->
+                    <td>{{ item.zone | translate_zone_number }}
                     <td><a href="https://www.warcraftlogs.com/reports/{{ item.id }}" target="_blank"><img width="16" height="16" src="https://dmszsuqyoe6y6.cloudfront.net/img/warcraft/favicon.png"></a> <a href="https://www.wipefest.net/report/{{ item.id }}" target="_blank"><img src="https://www.wipefest.gg/favicon.ico"></a> <a href="https://www.wowanalyzer.com/report/{{ item.id }}" target="_blank"><img src="https://wowanalyzer.com/favicon.ico"></a></td>
                 </tr>
             {% endfor %}
