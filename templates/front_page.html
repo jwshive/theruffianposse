@@ -9,11 +9,13 @@
 
     <div class="col-lg-7">
         <div class="container">
-            <div class="card mb-4  mt-3 left  top">
+            <div class="card text-white mb-4  mt-3 left border-light top">
             {% for news in guild_news %}
+              <div class="card-header">
+                  <a class="text-decoration-none" href="{% url 'read_news' news.id %}">{{ news.news_description }}</a>
+                  <p class=" text-muted">{{ news.added_by | title }} | {{ news.added_on }}</p>
+              </div>
               <div class="card-body">
-                  <h1><a class="text-decoration-none" href="{% url 'read_news' news.id %}">{{ news.news_description }}</a></h1>
-                <p class=" text-muted">{{ news.added_by | title }} | {{ news.added_on }}</p>
                 <p class="card-text ">{{ news.news_body | safe | truncatewords:50 }}</p>
               </div>
             {% endfor %}
