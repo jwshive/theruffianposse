@@ -4,6 +4,7 @@ body {
   padding-right: 20px;
   background-color: #232a35 !important;
   color: ghostwhite !important;
+  font-family: 'Odibee Sans', cursive !important;
 }
 
 .jumbotron {
@@ -12,8 +13,13 @@ body {
   -moz-background-size: 100% 100%;
   -o-background-size: 100% 100%;
   background-size: 100% 100%;
+  font-family: 'Odibee Sans', cursive !important;
 }
 
 .card {
   background-color: rgb(54, 58, 64) !important;
+}
+
+.gfont-odibee {
+  font-family: 'Odibee Sans', cursive !important;
 }

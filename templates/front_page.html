@@ -9,20 +9,22 @@
 
     <div class="col-lg-7">
         <div class="container">
-            <div class="card text-white mb-4  mt-3 left border-light top">
             {% for news in guild_news %}
+            <div class="card text-white mb-4  mt-3 left border-light top">
               <div class="card-header">
                   <a class="text-decoration-none" href="{% url 'read_news' news.id %}">{{ news.news_description }}</a>
-                  <p class=" text-muted">{{ news.added_by | title }} | {{ news.added_on }}</p>
+              </div>
+              <div class="card-header">
+                  <p class="text-muted"><small>{{ news.added_by | title }} | {{ news.added_on }}</small></p>
               </div>
               <div class="card-body">
                 <p class="card-text ">{{ news.news_body | safe | truncatewords:50 }}</p>
               </div>
-            {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-5 gfont-odibee">
         <table border="2">
             {% for raid_name, raid_ranking_info in guild_raid_rankings.raid_rankings.items %}
             <tr>
