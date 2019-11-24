@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import datetime
@@ -64,7 +65,11 @@ def apply_to_guild(request):
                 character_level=character_details['character_level'],
                 character_item_level_equipped=character_details['character_item_level_equipped']
             )
-            applicant.save()
+            try:
+                applicant.save()
+            except IntegrityError:
+                message = 'Looks like you have already applied once.'
+                return render(request, 'oops.html', {'message': message})
             return redirect('home')
     else:
         current_applicants = GuildApplications.objects.filter(application_status='Pending')

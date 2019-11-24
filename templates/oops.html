@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} <title>The Ruffian Posse</title> {% endblock %}
+{% block content %}
+{% load posse_filters %}
+
+    <div class="col-lg-7">
+        <div class="container">
+            <div class="card" style="width:500px">
+                <img class="card-img-top" src="https://40.media.tumblr.com/c312cc39bc83b8a81c0820fcd399341c/tumblr_nq44kpcfF51qjo5ngo1_1280.png" alt="Card image">
+                <div class="card-img-overlay">
+                    <h4 class="card-title">Oops!</h4>
+                    <p>{{ message }}</p>
+                </div>
+        </div>
+    </div>
+
+{% endblock %}

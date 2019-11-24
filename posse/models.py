@@ -94,6 +94,7 @@ class GuildApplications(models.Model):
 
     class Meta:
         verbose_name_plural = 'Guild Applicants'
+        unique_together = [['character_name', 'character_realm']]
 
     def __str__(self):
         return '{} => {} => {}'.format(self.character_name, self.discord_username, self.application_status)
