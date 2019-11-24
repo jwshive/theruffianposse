@@ -19,7 +19,7 @@
             <div class="card" style="width:500px">
                 <img class="card-img-top" src="{{toon.character_image_url}}" alt="Card image">
                 <div class="card-img-overlay">
-                    <h4 class="card-title">{{ toon.character_name|title }} of {{ toon.character_name|title|replace_dashes }}</h4>
+                    <h4 class="card-title">{{ toon.character_name|title }} of {{ toon.character_realm|title|replace_dashes }}</h4>
                     <p>Level : {{ toon.character_level }}</p>
                     <p>Item Level : {{ toon.character_item_level_equipped }}</p>
                     <a href="{{ toon.character_armory_link }}" class="btn btn-primary">See Profile</a>
