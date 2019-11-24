@@ -3,12 +3,15 @@
 {% block content %}
 {% load posse_filters %}
 
-{{ guild_info.guild_name_slug }}
+<p>{{ guild_info.guild_name }}</p>
+<p>{{ guild_info.guild_main_realm }}</p>
+<p>{{ guild_info.guild_description }}</p>
 
 
 {% regroup my_guild_leaders|dictsort:"guild_rank" by guild_rank as ranked_list %}
 
 	{% for rank in ranked_list %}
+
     <div class="col-lg-7">
         <div class="container">
             {% for member_rank in rank.list %}
@@ -16,12 +19,16 @@
                 <img class="card-img-top" src="{{member_rank.character_image_url}}" alt="Card image">
                 <div class="card-img-overlay">
                     <h4 class="card-title">{{ member_rank.character_name|title }} of {{ member_rank.character_realm|title|replace_dashes }}</h4>
+                    <p>{{ member_rank.guild_rank|translate_guild_rank }}</p>
                     <a href="https://worldofwarcraft.com/en-us/character/us/{{ member_rank.character_realm }}/{{ member_rank.character_name }}" target="_blank" class="btn btn-primary">See Profile</a>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
+    {% if rank.grouper == 0 %}
+        <hr>
+    {% endif %}
 	{% endfor %}
 
 

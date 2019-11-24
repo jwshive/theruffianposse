@@ -9,6 +9,7 @@ class GuildInformation(models.Model):
     guild_main_realm = models.CharField(max_length=100)
     guild_main_realm_slug = models.SlugField(blank=True, null=True)
     guild_ranks_to_query = models.CharField(max_length=100)
+    guild_description = models.TextField()
 
     class Meta:
         verbose_name_plural = 'Guild Information'

@@ -17,6 +17,11 @@ ZONE_NAMES = {
     10: 'Emerald Nightmare',
 }
 
+GUILD_RANKS = {
+    0: "The Ruffian - GM",
+    4: "Regulator"
+}
+
 register = template.Library()
 
 
@@ -35,6 +40,12 @@ def replace_dashes(value):
     return value.replace('-', ' ')
 
 
+def translate_guild_rank(s):
+    s = GUILD_RANKS[s]
+    return s
+
+
 register.filter('ctime', ctime)
 register.filter('translate_zone_number', translate_zone_number)
+register.filter('translate_guild_rank', translate_guild_rank)
 register.filter('replace_dashes', replace_dashes)
