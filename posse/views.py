@@ -1,13 +1,12 @@
 from django.db import IntegrityError
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import datetime
 from time import mktime
 import urllib.request
 import json
-from .models import WarcraftLogsSettings, RaiderIOSettings, GuildNews, HelpfulGuildLinks, GuildAddonLinks, GuildApplications
+from .models import WarcraftLogsSettings, RaiderIOSettings, GuildNews, HelpfulGuildLinks, GuildAddonLinks, GuildApplications, GuildInformation, GuildLeadership
 from .forms import ApplicationForm
-from .blizzard_api import get_character_information
+from .blizzard_api import get_character_information, get_guild_members, get_character_bust
 
 
 def get_json_data(json_url):
@@ -76,3 +75,31 @@ def apply_to_guild(request):
         form = ApplicationForm()
 
     return render(request, 'apply.html', {'form': form, 'current_applicants': current_applicants})
+
+
+def display_guild_leadership(request):
+    my_guild_leaders = GuildLeadership.objects.all().order_by('character_name')
+    my_guild = GuildInformation.objects.all().first()
+    return render(request, 'leadership.html', {'guild_info': my_guild, 'my_guild_leaders': my_guild_leaders})
+
+
+def update_guild_leadership(request):
+    GuildLeadership.objects.all().delete()
+    my_guild_members = get_guild_members()
+
+    for item in my_guild_members['members']:
+        if item['rank'] in (0, 4):
+
+            try:
+                character_image_url = get_character_bust(item['character']['realm']['slug'], item['character']['name'])
+            except KeyError:
+                character_image_url = 'http://www.onecatmainecoon.com/sitebuilder/images/cute01-230x116.jpg'
+
+            ojb, created = GuildLeadership.objects.update_or_create(
+                character_name=item['character']['name'],
+                guild_rank=item['rank'],
+                character_image_url=character_image_url,
+                character_realm=item['character']['realm']['slug']
+            )
+
+    return redirect('display_guild_leadership')

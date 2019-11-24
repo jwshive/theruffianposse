@@ -1,5 +1,25 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.text import slugify
+
+
+class GuildInformation(models.Model):
+    guild_name = models.CharField(max_length=100)
+    guild_name_slug = models.SlugField(blank=True, null=True)
+    guild_main_realm = models.CharField(max_length=100)
+    guild_main_realm_slug = models.SlugField(blank=True, null=True)
+    guild_ranks_to_query = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = 'Guild Information'
+
+    def save(self, *args, **kwargs):
+        self.guild_name_slug = slugify(self.guild_name)
+        self.guild_main_realm_slug = slugify(self.guild_main_realm)
+        super(GuildInformation, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.guild_name
 
 
 class BlizzardApiSettings(models.Model):
@@ -8,6 +28,7 @@ class BlizzardApiSettings(models.Model):
     token_api_url = models.URLField()
     character_media_api_url = models.URLField()
     character_profile_api_url = models.URLField()
+    guild_api_url = models.URLField()
 
     class Meta:
         verbose_name_plural = 'Blizzard API Settings'
@@ -100,3 +121,14 @@ class GuildApplications(models.Model):
         return '{} => {} => {}'.format(self.character_name, self.discord_username, self.application_status)
 
 
+class GuildLeadership(models.Model):
+    character_name = models.CharField(max_length=12)
+    character_image_url = models.URLField()
+    guild_rank = models.IntegerField()
+    character_realm = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = 'Guild Leaders'
+
+    def __str__(self):
+        return self.character_name
