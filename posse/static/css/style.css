@@ -4,11 +4,11 @@ body {
   padding-right: 20px;
   background-color: #232a35 !important;
   color: ghostwhite !important;
-  font-family: 'Muli', cursive !important;
+  font-family: 'Rubik', sans-serif !important;
 }
 
 .jumbotron {
-  background: url("/static/img/thumb-1920-705619.png") no-repeat center center;
+  background: url("/static/img/thumb-1920-705619.png") no-repeat;
   -webkit-background-size: 100% 100%;
   -moz-background-size: 100% 100%;
   -o-background-size: 100% 100%;
@@ -20,6 +20,6 @@ body {
   background-color: rgb(54, 58, 64) !important;
 }
 
-.gfont-odibee {
-  font-family: 'Odibee Sans', cursive !important;
+.rubik-standard {
+  font-family: 'Rubik:400', sans-serif !important;
 }

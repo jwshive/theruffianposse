@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} <title>The Ruffian Posse</title> {% endblock %}
 {% block content %}
+{% load posse_filters %}
 
     <form action="" method="post">
     {% csrf_token %}
@@ -8,7 +9,28 @@
     <input class="btn-warning" type="submit" value="Posse Up!">
     </form>
 
+    <hr>
+    {% if current_applicants %}
+    <h3>Pending Recruits</h3>
 
-    <!--- END Main Stuff --->
+    <div class="col-lg-7">
+        <div class="container">
+            {% for toon in current_applicants %}
+            <div class="card" style="width:500px">
+                <img class="card-img-top" src="{{toon.character_image_url}}" alt="Card image">
+                <div class="card-img-overlay">
+                    <h4 class="card-title">{{ toon.character_name|title }} of {{ toon.character_name|title|replace_dashes }}</h4>
+                    <p>Level : {{ toon.character_level }}</p>
+                    <p>Item Level : {{ toon.character_item_level_equipped }}</p>
+                    <a href="{{ toon.character_armory_link }}" class="btn btn-primary">See Profile</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+
+</div>
+
 {% endblock %}
 

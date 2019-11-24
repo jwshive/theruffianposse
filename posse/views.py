@@ -6,6 +6,7 @@ import urllib.request
 import json
 from .models import WarcraftLogsSettings, RaiderIOSettings, GuildNews, HelpfulGuildLinks, GuildAddonLinks, GuildApplications
 from .forms import ApplicationForm
+from .blizzard_api import get_character_information
 
 
 def get_json_data(json_url):
@@ -49,10 +50,24 @@ def apply_to_guild(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
         if form.is_valid():
-            applicant = form.save(commit=False)
+            data = form.cleaned_data
+            armory_data = str(data['character_armory_link']).split('/')
+            character_details = get_character_information(armory_data[6], armory_data[7])
+            print(character_details)
+            applicant = GuildApplications(
+                character_armory_link=data['character_armory_link'],
+                discord_username=data['discord_username'],
+                character_image_url=character_details['character_image_url'],
+                character_name=character_details['character_name'],
+                character_realm=character_details['character_realm'],
+                character_class=character_details['character_class'],
+                character_level=character_details['character_level'],
+                character_item_level_equipped=character_details['character_item_level_equipped']
+            )
             applicant.save()
             return redirect('home')
     else:
+        current_applicants = GuildApplications.objects.filter(application_status='Pending')
         form = ApplicationForm()
 
-    return render(request, 'apply.html', {'form': form})
+    return render(request, 'apply.html', {'form': form, 'current_applicants': current_applicants})

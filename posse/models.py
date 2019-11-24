@@ -2,6 +2,20 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+class BlizzardApiSettings(models.Model):
+    client_key = models.CharField(max_length=200)
+    client_secret = models.CharField(max_length=200)
+    token_api_url = models.URLField()
+    character_media_api_url = models.URLField()
+    character_profile_api_url = models.URLField()
+
+    class Meta:
+        verbose_name_plural = 'Blizzard API Settings'
+
+    def __str__(self):
+        return 'Blizzard API Settings'
+
+
 class WarcraftLogsSettings(models.Model):
     days_to_show = models.IntegerField()
     api_url = models.URLField()
@@ -68,16 +82,20 @@ APPLICANT_CHOICES = [
 
 
 class GuildApplications(models.Model):
+    character_armory_link = models.URLField()
+    discord_username = models.CharField(max_length=100)
+    character_image_url = models.URLField()
     character_name = models.CharField(max_length=12)
     character_realm = models.CharField(max_length=100)
     character_class = models.CharField(max_length=20)
-    character_role = models.CharField(max_length=10)
     character_level = models.IntegerField()
-    discord_username = models.CharField(max_length=100)
+    character_item_level_equipped = models.IntegerField()
     application_status = models.CharField(max_length=20, choices=APPLICANT_CHOICES, default=APPLICANT_CHOICES[0][0])
 
     class Meta:
         verbose_name_plural = 'Guild Applicants'
 
     def __str__(self):
-        return '{} of {}'.format(self.character_name, self.character_realm)
+        return '{} => {} => {}'.format(self.character_name, self.discord_username, self.application_status)
+
+
