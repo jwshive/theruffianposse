@@ -133,3 +133,15 @@ class GuildLeadership(models.Model):
 
     def __str__(self):
         return self.character_name
+
+
+class GuildMOTD(models.Model):
+    guild_motd_desc = models.CharField(max_length=255)
+    guild_motd = models.TextField()
+    posted_on = models.DateTimeField(auto_created=True)
+
+    class Meta:
+        verbose_name_plural = 'Guild Messages of the Day'
+
+    def __str__(self):
+        return self.guild_motd_desc

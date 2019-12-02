@@ -4,7 +4,7 @@ import datetime
 from time import mktime
 import urllib.request
 import json
-from .models import WarcraftLogsSettings, RaiderIOSettings, GuildNews, HelpfulGuildLinks, GuildAddonLinks, GuildApplications, GuildInformation, GuildLeadership
+from .models import WarcraftLogsSettings, RaiderIOSettings, GuildNews, HelpfulGuildLinks, GuildAddonLinks, GuildApplications, GuildInformation, GuildLeadership, GuildMOTD
 from .forms import ApplicationForm
 from .blizzard_api import get_character_information, get_guild_members, get_character_bust
 
@@ -21,6 +21,7 @@ def get_json_data(json_url):
 
 
 def home(request):
+    guild_motd = GuildMOTD.objects.last()
     warcraftlog_settings = WarcraftLogsSettings.objects.all().values('days_to_show', 'api_url')
     raiderio_settings = RaiderIOSettings.objects.all().values('api_url')
     guild_news = GuildNews.objects.filter(active=True).order_by('-added_on')
@@ -37,7 +38,14 @@ def home(request):
     guild_raid_rankings = raiderio_settings[0]['api_url']
     guild_raid_rankings = get_json_data(guild_raid_rankings)
 
-    return render(request, 'front_page.html', {'warcraft_logs': warcraft_logs_json, 'guild_raid_rankings': guild_raid_rankings, 'guild_news': guild_news, 'helpful_links': helpful_links, 'addon_links': addon_links})
+    return render(request, 'front_page.html', {
+        'warcraft_logs': warcraft_logs_json,
+        'guild_raid_rankings': guild_raid_rankings,
+        'guild_news': guild_news,
+        'helpful_links': helpful_links,
+        'addon_links': addon_links,
+        'guild_motd': guild_motd
+    })
 
 
 def read_news(request, id):

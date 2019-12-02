@@ -46,11 +46,6 @@
       </div>
     </li>
   </ul>
-  <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'admin:index' %}" target="_blank">Log In</a>
-    </li>
-  </ul>
 </nav>
 
 <body>
@@ -62,6 +57,13 @@
 </div>
 <div class=".bg-secondary">
     {% block content %}{% endblock %}
+</div>
+<div class="footer">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'admin:index' %}" target="_blank">Admin</a>
+    </li>
+  </ul>
 </div>
 </body>
 </html>

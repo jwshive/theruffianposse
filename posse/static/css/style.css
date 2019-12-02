@@ -23,3 +23,9 @@ body {
 .rubik-standard {
   font-family: 'Rubik:400', sans-serif !important;
 }
+
+.card-centered {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+}

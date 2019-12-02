@@ -4,6 +4,25 @@
 {% load posse_filters %}
 
     <!--- Main Stuff --->
+
+{% if guild_motd %}
+    <div class="container-full">
+        <div class="container">
+            <div class="card text-white mb-4  mt-3 left border-light top">
+              <div class="card-header">
+                  <a class="text-decoration-none">Guild Message of the Day</a>
+              </div>
+              <div class="card-header">
+                  <p class="text-muted"><small>{{ guild_motd.guild_motd_desc | title }} | {{ guild_motd.posted_on }}</small></p>
+              </div>
+              <div class="card-body">
+                <p class="card-text ">{{ guild_motd.guild_motd | safe }}</p>
+              </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
 <div class="container-full">
   <div class="row">
 
@@ -56,7 +75,7 @@
             {% endfor %}
         </table>
         <p></p>
-        <iframe src="https://discordapp.com/widget?id=295363255117938688&theme=dark&username=Kalinakov#7485" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+        <iframe src="https://discordapp.com/widget?id=295363255117938688&theme=dark&username=Kalinakov#7485" width="600" height="500" allowtransparency="true" frameborder="0"></iframe>
     </div>
 
   </div>
