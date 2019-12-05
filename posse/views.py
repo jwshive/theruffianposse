@@ -100,7 +100,7 @@ def update_guild_leadership(request):
     my_guild_members = get_guild_members()
 
     for item in my_guild_members['members']:
-        if item['rank'] in (0, 4):
+        if item['rank'] in (0, 1):
 
             try:
                 character_image_url = get_character_bust(item['character']['realm']['slug'], item['character']['name'])
