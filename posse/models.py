@@ -50,7 +50,8 @@ class WarcraftLogsSettings(models.Model):
 
 
 class RaiderIOSettings(models.Model):
-    api_url = models.URLField()
+    raid_rankings_api_url = models.URLField()
+    raid_progression_api_url = models.URLField()
 
     class Meta:
         verbose_name_plural = 'Raider.IO Settings'

@@ -23,7 +23,8 @@ def get_json_data(json_url):
 def home(request):
     guild_motd = GuildMOTD.objects.last()
     warcraftlog_settings = WarcraftLogsSettings.objects.all().values('days_to_show', 'api_url')
-    raiderio_settings = RaiderIOSettings.objects.all().values('api_url')
+    rank_rankings_raiderio_settings = RaiderIOSettings.objects.all().values('raid_rankings_api_url')
+    rank_progression_raiderio_settings = RaiderIOSettings.objects.all().values('raid_progression_api_url')
     guild_news = GuildNews.objects.filter(active=True).order_by('-added_on')
     helpful_links = HelpfulGuildLinks.objects.filter(link_active=True)
     addon_links = GuildAddonLinks.objects.all()
@@ -35,12 +36,15 @@ def home(request):
     warcraft_logs_api = warcraftlog_settings[0]['api_url'].format(a_month_ago_in_seconds)
     warcraft_logs_json = get_json_data(warcraft_logs_api)
 
-    guild_raid_rankings = raiderio_settings[0]['api_url']
+    guild_raid_rankings = rank_rankings_raiderio_settings[0]['raid_rankings_api_url']
+    guild_raid_progression = rank_progression_raiderio_settings[0]['raid_progression_api_url']
     guild_raid_rankings = get_json_data(guild_raid_rankings)
+    guild_raid_progression = get_json_data(guild_raid_progression)
 
     return render(request, 'front_page.html', {
         'warcraft_logs': warcraft_logs_json,
         'guild_raid_rankings': guild_raid_rankings,
+        'guild_raid_progression': guild_raid_progression,
         'guild_news': guild_news,
         'helpful_links': helpful_links,
         'addon_links': addon_links,

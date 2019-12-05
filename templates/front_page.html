@@ -22,10 +22,44 @@
         </div>
     </div>
 {% endif %}
-
+    <div class="container-full">
+        <div class="row">
+            <div class="col-lg-6">
+                <table border="2">
+                <tr>
+                    <th>Instance Name</th>
+                    <th>Best Progress</th>
+                    <th>Normal Kills</th>
+                    <th>Heroic Kills</th>
+                    <th>Mythic Kills</th>
+                </tr>
+                    {% for raid_name, raid_progression_info in guild_raid_progression.raid_progression.items %}
+                    <tr>
+                        <td>{{ raid_name|title|replace_dashes }}</td>
+                            <td>{{ raid_progression_info.summary }}</td>
+                            <td>{{ raid_progression_info.normal_bosses_killed }}</td>
+                            <td>{{ raid_progression_info.heroic_bosses_killed }}</td>
+                            <td>{{ raid_progression_info.mythic_bosses_killed }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-lg-6">
+                <table border="2">
+                    {% for raid_name, raid_ranking_info in guild_raid_rankings.raid_rankings.items %}
+                    <tr>
+                        <th colspan="3">{{ raid_name|title|replace_dashes }}</th>
+                        {% for difficulty, nested_value in raid_ranking_info.items %}
+                            <td>{{ difficulty|title }}: {% if nested_value.realm == 0 %}No Kills{% else %}{{ nested_value.realm }}{% endif %}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
 <div class="container-full">
   <div class="row">
-
     <div class="col-lg-7">
         <div class="container">
             {% for news in guild_news %}
@@ -43,18 +77,8 @@
             {% endfor %}
         </div>
     </div>
+  <!--- raid progression --->
     <div class="col-lg-5">
-        <table border="2">
-            {% for raid_name, raid_ranking_info in guild_raid_rankings.raid_rankings.items %}
-            <tr>
-                <th colspan="3">{{ raid_name|title|replace_dashes }}</th>
-                {% for difficulty, nested_value in raid_ranking_info.items %}
-                    <td>{{ difficulty|title }}: {% if nested_value.realm == 0 %}No Kills{% else %}{{ nested_value.realm }}{% endif %}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </table>
-    <p></p>
         <table border="2">
             <tr>
                 <th colspan="4">Recent Raid Logs</th>
@@ -74,12 +98,17 @@
                 </tr>
             {% endfor %}
         </table>
-        <p></p>
-        <iframe src="https://discordapp.com/widget?id=295363255117938688&theme=dark&username=Kalinakov#7485" width="600" height="500" allowtransparency="true" frameborder="0"></iframe>
     </div>
-
   </div>
 </div>
+
+{#    <div class="container-full">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-7">#}
+{#                <iframe src="https://discordapp.com/widget?id=295363255117938688&theme=dark&username=Kalinakov#7485" width="600" height="500" allowtransparency="true" frameborder="0"></iframe>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 
     <!--- END Main Stuff --->
 {% endblock %}
