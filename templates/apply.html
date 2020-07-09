@@ -30,6 +30,22 @@
     </div>
     {% endif %}
 
+    {% if current_classes %}
+    <h3>Shadowland Classes</h3>
+
+    <div class="col-lg-7">
+        <div class="container">
+            {% for toon in current_classes %}
+            <div class="card" style="width:500px">
+                <div class="card-img-overlay">
+                    <h4 class="card-title">{{ toon.username|title }} playing {{ toon.shadowlands_class }}</h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
 
 </div>
 
