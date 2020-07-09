@@ -35,13 +35,15 @@
 
     <div class="col-lg-7">
         <div class="container">
-            {% for toon in current_classes %}
-            <div class="card" style="width:500px">
-                <div class="card-img-overlay">
-                    <h4 class="card-title">{{ toon.username|title }} playing {{ toon.shadowlands_class }}</h4>
-                </div>
-            </div>
-            {% endfor %}
+        <table>
+            <tr>
+                {% for toon in current_classes %}
+                    <td>{{ toon.username }}</td>
+                    <td>Playing</td>
+                    <td>{{ toon.shadowlands_class }}</td>
+                {% endfor %}
+            </tr>
+        </table>
         </div>
     </div>
     {% endif %}
