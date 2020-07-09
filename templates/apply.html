@@ -40,7 +40,7 @@
                 <tr>
                     <td>{{ toon.username }}</td>
                     <td>Playing</td>
-                    <td>{{ toon.shadowlands_class }}</td>
+                    <td>{{ toon.get_shadowlands_class_display }}</td>
                 </tr>
                 {% endfor %}
         </table>
