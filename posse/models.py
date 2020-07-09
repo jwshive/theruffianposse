@@ -182,6 +182,7 @@ class ShadowlandsClassChart(models.Model):
 
     class Meta:
         verbose_name_plural = 'Shadowlands Class Chart'
+        unique_together = [['username', 'shadowlands_class']]
 
     def __str__(self):
         return self.username

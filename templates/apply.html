@@ -36,13 +36,13 @@
     <div class="col-lg-7">
         <div class="container">
         <table>
-            <tr>
                 {% for toon in current_classes %}
+                <tr>
                     <td>{{ toon.username }}</td>
                     <td>Playing</td>
                     <td>{{ toon.shadowlands_class }}</td>
+                </tr>
                 {% endfor %}
-            </tr>
         </table>
         </div>
     </div>
