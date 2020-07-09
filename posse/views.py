@@ -4,8 +4,8 @@ import datetime
 from time import mktime
 import urllib.request
 import json
-from .models import WarcraftLogsSettings, RaiderIOSettings, GuildNews, HelpfulGuildLinks, GuildAddonLinks, GuildApplications, GuildInformation, GuildLeadership, GuildMOTD
-from .forms import ApplicationForm
+from .models import WarcraftLogsSettings, RaiderIOSettings, GuildNews, HelpfulGuildLinks, GuildAddonLinks, GuildApplications, GuildInformation, GuildLeadership, GuildMOTD, ShadowlandsClassChart
+from .forms import ApplicationForm, ShadowlandsClass
 from .blizzard_api import get_character_information, get_guild_members, get_character_bust
 
 
@@ -115,3 +115,24 @@ def update_guild_leadership(request):
             )
 
     return redirect('display_guild_leadership')
+
+
+def shadowlands_class_chart(request):
+    if request.method == 'POST':
+        form = ShadowlandsClass(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            shadowlands_class = ShadowlandsClassChart(
+                username=data['username'],
+                shadowlands_class=data['shadowlands_class']
+            )
+            try:
+                shadowlands_class.save()
+            except IntegrityError:
+                message = 'Looks like you have already applied once.'
+                return render(request, 'oops.html', {'message': message})
+            return redirect('home')
+    else:
+        form = ShadowlandsClass()
+
+    return render(request, 'apply.html', {'form': form})

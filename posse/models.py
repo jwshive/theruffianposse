@@ -146,3 +146,42 @@ class GuildMOTD(models.Model):
 
     def __str__(self):
         return self.guild_motd_desc
+
+
+CLASS_CHOICES = [
+    ('TANK_DK', 'Tank Death Knight'),
+    ('DPS_DK', 'DPS Death Knight'),
+    ('TANK_DH', 'Tank Demon Hunter'),
+    ('DPS_DH', 'DPS Demon Hunter'),
+    ('TANK_DRUID', 'Tank Druid'),
+    ('DPS_DRUID', 'DPS Druid'),
+    ('HEALER_DRUID', 'Healer Druid'),
+    ('HUNTER', 'Hunter'),
+    ('MAGE', 'Mage'),
+    ('TANK_MONK', 'Tank Monk'),
+    ('DPS_MONK', 'DPS Monk'),
+    ('HEALER_MONK', 'Healer Monk'),
+    ('TANK_PALADIN', 'Tank Paladin'),
+    ('DPS_PALADIN', 'DPS Paladin'),
+    ('HEALER_PALADIN', 'Healer Paladin'),
+    ('HEALER_PRIEST', 'Healer Priest'),
+    ('DPS_PRIEST', 'DPS Priest'),
+    ('ROGUE', 'Rogue'),
+    ('HEALER_SHAMAN', 'Healer Shaman'),
+    ('DPS_SHAMAN', 'DPS Shaman'),
+    ('WARLOCK', 'Warlock'),
+    ('TANK_WARRIOR', 'Tank Warrior'),
+    ('DPS_WARRIOR', 'DPS Warrior'),
+
+]
+
+
+class ShadowlandsClassChart(models.Model):
+    username = models.CharField(max_length=25)
+    shadowlands_class = models.CharField(max_length=50, choices=CLASS_CHOICES)
+
+    class Meta:
+        verbose_name_plural = 'Shadowlands Class Chart'
+
+    def __str__(self):
+        return self.username
