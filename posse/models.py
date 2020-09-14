@@ -177,12 +177,13 @@ CLASS_CHOICES = [
 
 
 class ShadowlandsClassChart(models.Model):
-    username = models.CharField(max_length=25)
-    shadowlands_class = models.CharField(max_length=50, choices=CLASS_CHOICES)
+    username = models.CharField('Current Main Name', max_length=25)
+    shadowlands_first_choice = models.CharField('Shadowlands Class First Choice', max_length=50, choices=CLASS_CHOICES)
+    shadowlands_second_choice = models.CharField('Shadowlands Class Second Choice', max_length=50, choices=CLASS_CHOICES, blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Shadowlands Class Chart'
-        unique_together = [['username', 'shadowlands_class']]
+        unique_together = [['username', 'shadowlands_first_choice']]
 
     def __str__(self):
         return self.username

@@ -35,14 +35,24 @@
 
     <div class="col-lg-7">
         <div class="container">
-        <table>
-                {% for toon in current_classes %}
-                <tr>
-                    <td>{{ toon.username }}</td>
-                    <td>Playing</td>
-                    <td>{{ toon.get_shadowlands_class_display }}</td>
-                </tr>
-                {% endfor %}
+        </table>
+        <table class="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Current Main Name</th>
+              <th scope="col">Shadowlands First Choice</th>
+              <th scope="col">Shadowlands Second Choice</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for toon in current_classes %}
+            <tr>
+              <td>{{ toon.username }}</td>
+              <td>{{ toon.get_shadowlands_first_choice_display }}</td>
+              <td>{{ toon.get_shadowlands_second_choice_display }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
         </table>
         </div>
     </div>

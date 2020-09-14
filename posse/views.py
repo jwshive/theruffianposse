@@ -124,7 +124,8 @@ def shadowlands_class_chart(request):
             data = form.cleaned_data
             shadowlands_class = ShadowlandsClassChart(
                 username=data['username'],
-                shadowlands_class=data['shadowlands_class']
+                shadowlands_first_choice=data['shadowlands_first_choice'],
+                shadowlands_second_choice=data['shadowlands_second_choice']
             )
             try:
                 shadowlands_class.save()
