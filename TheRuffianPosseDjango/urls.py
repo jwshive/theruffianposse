@@ -23,9 +23,10 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', posse_views.home, name='home'),
+    path('', posse_views.shadowlands_class_chart, name='home'),
+    #path('', posse_views.home, name='home'),
     #path('', TemplateView.as_view(template_name='awareness.html'), name='home'),
-    #path('guild/', posse_views.home, name='home'),
+    path('guild/', posse_views.home, name='home'),
     path('news/<int:id>/', posse_views.read_news, name='read_news'),
     path('apply', posse_views.apply_to_guild, name='apply_to_guild'),
     path('update_leadership', posse_views.update_guild_leadership, name='update_leadership'),

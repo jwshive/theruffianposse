@@ -132,7 +132,7 @@ def shadowlands_class_chart(request):
             except IntegrityError:
                 message = 'Looks like you have already applied once.'
                 return render(request, 'oops.html', {'message': message})
-            return redirect('home')
+            return redirect('shadowlands')
     else:
         current_classes = ShadowlandsClassChart.objects.all()
         form = ShadowlandsClass()
