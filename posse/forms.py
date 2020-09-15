@@ -11,4 +11,4 @@ class ApplicationForm(ModelForm):
 class ShadowlandsClass(ModelForm):
     class Meta:
         model = ShadowlandsClassChart
-        fields = ['username', 'shadowlands_first_choice', 'shadowlands_second_choice']
+        fields = ['username', 'shadowlands_main', 'shadowlands_main_alt']

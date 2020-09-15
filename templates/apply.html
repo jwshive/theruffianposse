@@ -32,6 +32,7 @@
 
     {% if current_classes %}
     <h3>Shadowland Classes</h3>
+        <h4>Main Alt can be blank</h4>
 
     <div class="col-lg-7">
         <div class="container">
@@ -40,16 +41,16 @@
           <thead>
             <tr>
               <th scope="col">Current Main Name</th>
-              <th scope="col">Shadowlands First Choice</th>
-              <th scope="col">Shadowlands Second Choice</th>
+              <th scope="col">Shadowlands Main</th>
+              <th scope="col">Shadowlands Main Alt</th>
             </tr>
           </thead>
           <tbody>
           {% for toon in current_classes %}
             <tr>
               <td>{{ toon.username }}</td>
-              <td>{{ toon.get_shadowlands_first_choice_display }}</td>
-              <td>{{ toon.get_shadowlands_second_choice_display }}</td>
+              <td>{{ toon.get_shadowlands_main_display }}</td>
+              <td>{{ toon.get_shadowlands_main_alt_display }}</td>
             </tr>
           {% endfor %}
           </tbody>
