@@ -134,7 +134,7 @@ def shadowlands_class_chart(request):
                 return render(request, 'oops.html', {'message': message})
             return redirect('shadowlands')
     else:
-        current_classes = ShadowlandsClassChart.objects.all()
+        current_classes = ShadowlandsClassChart.objects.all().order_by('username')
         form = ShadowlandsClass()
 
     return render(request, 'apply.html', {'form': form, 'current_classes': current_classes})
