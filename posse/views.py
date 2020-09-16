@@ -1,4 +1,5 @@
 from django.db import IntegrityError
+from django.db.models import Count
 from django.shortcuts import render, redirect
 import datetime
 from time import mktime
@@ -137,4 +138,15 @@ def shadowlands_class_chart(request):
         current_classes = ShadowlandsClassChart.objects.all().order_by('username')
         form = ShadowlandsClass()
 
-    return render(request, 'apply.html', {'form': form, 'current_classes': current_classes})
+        from django.db.models import Q
+        dps_count = ShadowlandsClassChart.objects.filter(Q(shadowlands_main__contains="DPS")|Q(shadowlands_main__in=["WARLOCK","HUNTER","MAGE","ROGUE"]))
+        healer_count = ShadowlandsClassChart.objects.filter(shadowlands_main__contains="HEALER")
+        tank_count = ShadowlandsClassChart.objects.filter(shadowlands_main__contains="TANK")
+
+    return render(request, 'apply.html', {
+        'form': form,
+        'current_classes': current_classes,
+        'dps_count': dps_count,
+        'healer_count': healer_count,
+        'tank_count': tank_count
+    })
