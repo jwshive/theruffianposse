@@ -19,7 +19,8 @@ ZONE_NAMES = {
 
 GUILD_RANKS = {
     0: "The Ruffian - GM",
-    1: "Regulator"
+    1: "The OUtlaw - GM",
+    2: "Regulator"
 }
 
 register = template.Library()
